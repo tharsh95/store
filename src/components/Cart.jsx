@@ -1,50 +1,26 @@
-// import { useSelector } from 'react-redux';
-
-// const Cart = () => {
-//     const cartItems = useSelector((state) => state.cart.items);
-//     const itemCount = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
-
-//     return (
-//         <div>
-//             <h2>Cart Summary</h2>
-//             <p>Total Items: {itemCount}</p>
-//             {/* Display more summary information */}
-//         </div>
-//     );
-// };
-
-// export default Cart;
-
 import { useDispatch, useSelector } from "react-redux";
-import useItem from "../hooks/useItem";
 import { addToCart, removeFromCart } from "../features/cart/cartSlice";
-import { Rabbit } from "lucide-react";
+import axios from "axios";
 
 const Cart = () => {
   const items = useSelector((state) => state.cart.items);
-  const status = useSelector((state) => state.cart.status);
-  const error = useSelector((state) => state.cart.error);
   const dispatch = useDispatch();
-
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
 
   const isEmpty = Object.keys(items).length === 0;
 
   if (isEmpty) {
-      return <span className="flex justify-center items-center h-[75vh] text-2xl font-bold"><span>Your cart is empty</span></span>;
+    return (
+      <span className="flex justify-center items-center h-[81vh] text-2xl font-bold">
+        <span>Your cart is empty</span>
+      </span>
+    );
   }
 
-  if (status === "failed") {
-    return <div>Error: {error}</div>;
-  }
 
   const handleAddToCart = async (id, type) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const data = await response.json();
+    const response = await axios.get(`${import.meta.env.VITE_ECOM_API}/${id}`);
 
-    type ? dispatch(addToCart(data)) : dispatch(removeFromCart(data));
+    type ? dispatch(addToCart(response.data)) : dispatch(removeFromCart(response.data));
   };
   return (
     <div>

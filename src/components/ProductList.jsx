@@ -1,14 +1,3 @@
-// import React from "react";
-// import useList from "../hooks/useList";
-
-// const ProductList = () => {
-//   const { data, loading, error } = useList();
-//   console.log(data)
-//   return <div>ProductList</div>;
-// };
-
-// export default ProductList;
-
 import useList from "../hooks/useList";
 import ProductItem from "./ProductItem";
 import Skeleton from "./Skeleton";
@@ -38,9 +27,7 @@ const ProductList = () => {
           id={el.id}
           title={el.title}
           price={el.price}
-          description={el.description}
           image={el.image}
-          rating={el.rating}
         />
       ))}
     </div>

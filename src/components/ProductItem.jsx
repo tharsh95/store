@@ -4,7 +4,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ id, title, price, description, rating, image }) => {
+const ProductItem = ({ id, title, price, image }) => {
   return (
     <div className="flex flex-col justify-between h-[19rem] border-2 border-gray-100  w-[12rem] drop-shadow-lg m-4 rounded-lg">
       <img src={image} alt={title} className="h-[10rem] w-[12rem]" />

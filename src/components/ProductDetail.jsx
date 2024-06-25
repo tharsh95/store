@@ -7,7 +7,7 @@ import StarGenerator from "./Rating";
 
 const ProductDetail = () => {
   const { productId } = useParams();
-  const { data, loading, error } = useItem(productId);
+  const { data, loading } = useItem(productId);
   const dispatch = useDispatch();
 
     const handleAddToCart = () => {
